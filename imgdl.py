@@ -18,24 +18,28 @@ from BeautifulSoup import BeautifulSoup
 time1 = time.time()
 
 #try:
-#  rss 
-feed_ = feedparser.parse(sys.argv[2])
-# 
-count = len(feed_['entries'])
-counts = [i for i in range(count)]
-
-
-#  description 
-descriptions = [feed_.entries[x].description for x in counts]
-description_soup = BeautifulSoup(''.join(descriptions))
-#  descriptions  img  src 
-imgs_src = [description_soup.findAll('img')[x]['src'] for x in counts]
+##  rss 
+#feed_ = feedparser.parse(sys.argv[2])
+## 
+#count = len(feed_['entries'])
+#counts = [i for i in range(count)]
+#
+#
+##  description 
+#descriptions = [feed_.entries[x].description for x in counts]
+#description_soup = BeautifulSoup(''.join(descriptions))
+##  descriptions  img  src 
+#imgs_src = [description_soup.findAll('img')[x]['src'] for x in counts]
+#
 
 ####tumblr api
-soup = BeautifulSoup(urllib2.urlopen(sys.argv[2]))
-count = len(soup.findAll('photo-url'))
-counts = [i for i in range(count)]
-imgs_src = [soup.findAll('photo-url')[x].contents[0] for x in counts]
+imgs_src = []
+for i in range (0,int(sys.argv[3])):
+    url=sys.argv[2] + "/api/read?start=" + str(i*20)
+    soup = BeautifulSoup(urllib2.urlopen(url))
+    count = len(soup.findAll('photo-url'))
+    counts = [i for i in range(count)]
+    imgs_src += [soup.findAll('photo-url')[x].contents[0] for x in counts]
 
 
 #print soup.findAll('photo-url')['max-width']
