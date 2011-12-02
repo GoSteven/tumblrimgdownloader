@@ -11,7 +11,7 @@ from Queue import Queue
 import time
 import sys
 # Universal Feed Parser(http://www.crummy.com/software/BeautifulSoup/)
-import feedparser
+#import feedparser
 # BeautifulSoup(http://www.crummy.com/software/BeautifulSoup/)
 from BeautifulSoup import BeautifulSoup
 
@@ -66,7 +66,7 @@ def download_img(img_src, savePath):
         if not "500" in img_src:
             return;
         # 
-        fileName = save_path + '\\' + basename(urlsplit(img_src)[2])
+        fileName = os.path.join(save_path , basename(urlsplit(img_src)[2]))
         # 
         if not os.path.exists(fileName):
             imgData = urllib2.urlopen(img_src).read()
@@ -101,7 +101,7 @@ def process(imgs_src, save_path, numthreads):
                 if not "500" in img_src:
                     return;
                 # 
-                fileName = save_path + '\\' + basename(urlsplit(img_src)[2])
+                fileName = os.path.join(save_path , basename(urlsplit(img_src)[2]))
                 # 
                 if not os.path.exists(fileName):
                     imgData = urllib2.urlopen(img_src).read()
