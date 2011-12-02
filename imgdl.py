@@ -65,11 +65,11 @@ def download_img(img_src, savePath):
     try:
         if not "500" in img_src:
             return;
-        imgData = urllib2.urlopen(img_src).read()
         # 
         fileName = save_path + '\\' + basename(urlsplit(img_src)[2])
         # 
         if not os.path.exists(fileName):
+            imgData = urllib2.urlopen(img_src).read()
             output = open(fileName,'wb+')
             output.write(imgData)
             output.close()
@@ -100,11 +100,11 @@ def process(imgs_src, save_path, numthreads):
             try:
                 if not "500" in img_src:
                     return;
-                imgData = urllib2.urlopen(img_src).read()
                 # 
                 fileName = save_path + '\\' + basename(urlsplit(img_src)[2])
                 # 
                 if not os.path.exists(fileName):
+                    imgData = urllib2.urlopen(img_src).read()
                     output = open(fileName,'wb+')
                     output.write(imgData)
                     output.close()
